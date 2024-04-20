@@ -1,5 +1,5 @@
 # Define la ruta del directorio que quieres explorar
-$directorio = "C:\"
+$directorio = "C:\SQL2019"
 
 # Usa Get-ChildItem para obtener el contenido del directorio
 $contenido = Get-ChildItem -Path $directorio
