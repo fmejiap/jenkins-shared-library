@@ -29,7 +29,6 @@ try {
         New-Item -ItemType Directory -Path $backupFolderPath
         Write-Host "Backup directory created."
     }
-    exit 1
     $targetPath = "${backupFolderPath}\${backupFileName}"
 
     $smoBackup = New-Object ("Microsoft.SqlServer.Management.Smo.Backup")
