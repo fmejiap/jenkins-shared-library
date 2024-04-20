@@ -54,9 +54,12 @@ try {
         Write-Host "Incremental database backup $targetPath completed successfully."
     }
 
+    exit 0 # success
+
 }
 catch {
     Write-Host "An error occurred:"
     Write-Host $_
     Write-Host $_.ScriptStackTrace
+    exit 1
 }
