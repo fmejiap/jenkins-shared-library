@@ -1,5 +1,5 @@
 def call (Map config = [:]) {
-  println "Set environment variables for '${config.serviceName}' application"
+  println "Set environment variables for '${config.siteName}' application"
   
   if (config.environmentVariables != null)
   {
@@ -10,5 +10,5 @@ def call (Map config = [:]) {
     }
 	}
   
-  println "Set environment variables for '${config.serviceName}' application done."
+  println "Set environment variables for '${config.siteName }' application done."
 }
