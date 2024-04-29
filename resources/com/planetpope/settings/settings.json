@@ -10,8 +10,8 @@
     }
   ],
   "replaceConfigs":[
-    [replace: websitewebapiBindURL, search: websitewebapiBindPattern],
-    [replace: allowedOriginsCorsPattern, search: "(\\(\\(GAME_ENGINE_ALLOWED_ORIGINS\\)\\))"],
-    [replace: productGatewayBindURL, search: productGatewayBindPattern]
+    {"replace": "websitewebapiBindURL", "search": "websitewebapiBindPattern"},
+    {"replace": "allowedOriginsCorsPattern", "search": "(\\(\\(GAME_ENGINE_ALLOWED_ORIGINS\\)\\))"},
+    {"replace": "productGatewayBindURL", "search": "productGatewayBindPattern"}
   ]
 }
