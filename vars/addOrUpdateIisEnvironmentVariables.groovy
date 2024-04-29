@@ -10,5 +10,5 @@ def call (Map config = [:]) {
     }
 	}
   
-  println "Set environment variables for '${config.siteName }' application done."
+  println "Set environment variables for '${config.siteName}' application done."
 }
