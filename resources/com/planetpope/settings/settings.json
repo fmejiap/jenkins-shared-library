@@ -8,5 +8,10 @@
     "name": "ENGINE_REDIRECT2_HTTPS",
     "value": false
     }
+  ],
+  "replaceConfigs":[
+    [replace: websitewebapiBindURL, search: websitewebapiBindPattern],
+    [replace: allowedOriginsCorsPattern, search: "(\\(\\(GAME_ENGINE_ALLOWED_ORIGINS\\)\\))"],
+    [replace: productGatewayBindURL, search: productGatewayBindPattern]
   ]
 }
