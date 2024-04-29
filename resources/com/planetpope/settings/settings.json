@@ -1,0 +1,8 @@
+{
+  "targetEnvironmentVariables":[
+    {
+    "name": "GAME_ENGINE_REDIRECT_HTTPS",
+    "value": true
+		}
+  ]
+}
