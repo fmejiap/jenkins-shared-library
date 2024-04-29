@@ -4,10 +4,8 @@ def call (Map config = [:]) {
   if (config.environmentVariables != null)
   {
     //Reset/Deleted all environmentVariables
-    for (item in config.environmentVariables)
-    {
-      executeiisAppCmd.call("clear config "+config.siteName + " -section:system.webServer/aspNetCore /environmentVariables:[] /commit:apphost")
-    }
+    executeiisAppCmd.call("clear config "+config.siteName + " -section:system.webServer/aspNetCore /environmentVariables:[] /commit:apphost")
+    
    //Added new environmentVariables
    for (item in config.environmentVariables)
     {
