@@ -14,7 +14,7 @@ def call(Map config = [:]) {
             fileContentReplaceConfig(
                 configs: fileReplaceConfigs,
                 fileEncoding: 'UTF-8',
-                filePath: config.filePath
+                filePath: config.filesPath
             )
         ])
 }
