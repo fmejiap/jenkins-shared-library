@@ -5,7 +5,7 @@ def call (Map config = [:]) {
   {
     for (item in config.environmentVariables)
     {
-      executeiisAppCmd.call("clear config "+config.siteName + " -section:system.webServer/aspNetCore //environmentVariables:[] /commit:apphost")
+      executeiisAppCmd.call("clear config "+config.siteName + " -section:system.webServer/aspNetCore /environmentVariables:[] /commit:apphost")
       executeiisAppCmd.call("set config "+config.siteName + " -section:system.webServer/aspNetCore /+" + "environmentVariables.[name='${item.name}',value='${item.value}']"+" /commit:apphost")
     }
 	}
