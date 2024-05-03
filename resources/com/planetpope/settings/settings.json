@@ -18,7 +18,7 @@
   [
     {
       "description": "Copy files tu custom view",
-      "includes": "C:\\inetpub\\wwwroot\\test02\\view\\custom\\*",
+      "includes": "C:\\inetpub\\wwwroot\\test02\\view\\custom\\**",
       "targetLocation": "C:\\inetpub\\wwwroot\\test02\\view\\"
     }
   ]  
