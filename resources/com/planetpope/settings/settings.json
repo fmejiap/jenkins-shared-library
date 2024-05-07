@@ -21,8 +21,10 @@
   "customenvironment":{
     "ui": {
 			"configurations": {
-				"faviIconsConfiguration": {
-					"faviIconsFolderName" :"custom"
+				"customizationViews": {
+					"faviIconsConfiguration": {
+						"faviIconsFolderName" :"custom"
+					}
 				}
 			}
 		}
