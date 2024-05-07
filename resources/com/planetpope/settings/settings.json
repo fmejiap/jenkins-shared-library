@@ -1,4 +1,32 @@
 {
+  "appPaths":{
+    "services": {
+  		"ui": {
+  			"install": {
+  				"path": "C:\\inetpub\\wwwroot\\test02"
+  			},
+  			"configurations": {
+  				"customizationViews": {
+  					"faviIconsConfiguration" :
+  					{
+  						"description": "Setting custom for the view",
+  						"sourceLocation": "%s\\%s\\*.*",
+  						"targetLocation": "%s\\"
+  					}
+  				}
+  			}
+  			}
+		}
+	},
+  "customenvironment":{
+    "ui": {
+			"configurations": {
+				"faviIconsConfiguration": {
+					"faviIconsFolderName" :"custom"
+				}
+			}
+		}
+  },
   "targetEnvironmentVariables":[
     {
     "name": "ENGINE_REDIRECT_HTTPS",
