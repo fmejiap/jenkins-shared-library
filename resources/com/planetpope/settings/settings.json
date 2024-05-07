@@ -11,7 +11,7 @@
   					{
   						"description": "Setting custom for the view",
   						"sourceLocation": "%s\\view\\%s\\*.*",
-  						"targetLocation": "%s\\view\\"
+  						"targetLocation": "%s\\view"
   					}
   				}
   			}
