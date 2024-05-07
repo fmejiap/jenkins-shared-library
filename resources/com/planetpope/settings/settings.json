@@ -10,8 +10,8 @@
   					"faviIconsConfiguration" :
   					{
   						"description": "Setting custom for the view",
-  						"sourceLocation": "%s\\%s\\*.*",
-  						"targetLocation": "%s\\"
+  						"sourceLocation": "%s\\view\\%s\\*.*",
+  						"targetLocation": "%s\\view\\"
   					}
   				}
   			}
