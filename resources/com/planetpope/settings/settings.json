@@ -20,7 +20,9 @@
 	},
   "customenvironment":{
     "ui": {
-		}
+	    "configurations": {
+	    }
+    }
   },
   "targetEnvironmentVariables":[
     {
