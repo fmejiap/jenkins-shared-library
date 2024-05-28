@@ -1,0 +1,5 @@
+{
+    "name": "skipped_gamescodes_name",
+    "description": "SkippedGameCodes desc",
+    "value": ["one","two","three"]
+}
