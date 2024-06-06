@@ -13,7 +13,7 @@ def call(Map config = [:]) {
      def databaseBuilder = new DatabaseBuilder()
                                 .addNodeName("environmentData.database.nodeName ?: appPathsData.database.nodeName")
                                 .build()
-    println "zzzz > ${databaseBuilder}"
+    println "zzzz > ${databaseBuilder.nodeName}"
     sh "echo Hello ${config.name}. Today is ${config.dayOfWeek}."
     
 }
