@@ -1,3 +1,4 @@
+package com.planetapope.computeraggregate
 
 public class DatabaseBuilder {
 
