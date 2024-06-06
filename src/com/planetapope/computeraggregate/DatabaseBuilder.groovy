@@ -1,5 +1,6 @@
 package com.planetapope.computeraggregate
 import com.planetapope.exceptions.ValidationException
+import com.planetapope.computeraggregate.Database
 
 public class DatabaseBuilder {
 
