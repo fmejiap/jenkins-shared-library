@@ -7,7 +7,6 @@ class ValidationException extends Exception {
 
     ValidationException(String message) {
         super(message)
-        println "ERROR: ${message}"
     }
 
     ValidationException(String message, Throwable cause) {
