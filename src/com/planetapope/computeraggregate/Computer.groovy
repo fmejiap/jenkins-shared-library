@@ -8,7 +8,7 @@ public class Computer {
 	public static class ComputerBuilder{
 		String model
 		public ComputerBuilder setModel(model) {
-			this.isGraphicsCardEnabled = isGraphicsCardEnabled;
+			this.model = model;
 			return this;
 		}
 		
