@@ -1,3 +1,5 @@
+package com.planetapope.computeraggregate
+
 public class Database {
     String nodeName
     String connUser
