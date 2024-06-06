@@ -1,5 +1,5 @@
 def call(Map config = [:]) {
-    throw new Exception("Error...!")
+    throw new ValidationException ("Error...!")
     sh "echo Hello ${config.name}. Today is ${config.dayOfWeek}."
     
 }
