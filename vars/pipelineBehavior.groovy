@@ -7,7 +7,8 @@ def validatePipelineApproval(Map config = [:]) {
                 approval = input(id: 'wait-approval',
                                 message: '  Waiting for approval  ',
                                 submitterParameter: 'approver',
-                                parameters: [choice(choices: ['Reject', 'Approve'], description: 'Are you sure?', name: 'choice')])
+                                parameters: [choice(choices: ['Reject', 'Approve'], description: 'Are you sure?', name: 'choice'),
+                                            text(name: 'comment', defaultValue: '', description: 'Enter some information')])
                 }
 
                 if (approval['choice'] == 'Approve') {
