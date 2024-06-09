@@ -27,7 +27,7 @@ def validatePipelineApproval(Map config = [:]) {
         }
         catch (Exception e) {
             log.error message: e.getMessage()
-            currentBuild.result = 'Fail'
+            currentBuild.result = 'FAILURE'
         }
     }
     else {
@@ -41,9 +41,7 @@ Boolean validateDeployApprovedUser(Map config = [:]) {
 
     String userId = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).getUserId()
     if (!config.deployApprovedUsers.contains(userId)) {
-        log.error message: 'User not allowed to run the pipeline'
         throw new Exception('User not allowed to run the pipeline')
     }
-
     return true
 }
