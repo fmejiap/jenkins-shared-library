@@ -1,4 +1,3 @@
-@NonCPS
 def validatePipelineApproval(Map config = [:]) {
     log.info message: 'Checking if approval is needed...'
 
@@ -37,7 +36,6 @@ def validatePipelineApproval(Map config = [:]) {
     log.info message: 'Approval checked!'
 }
 
-@NonCPS
 Boolean validateDeployApprovedUser(Map config = [:]) {
     log.info message: 'Checking if user is allowed to run the pipeline...'
 
