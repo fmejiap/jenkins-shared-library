@@ -1,33 +1,37 @@
 def validatePipelineApproval(Map config = [:]) {
     log.info message: 'Checking if approval is needed...'
-
-    if (config.needsApproval) {
-        log.info message: 'Approval needed'
-        def approval = null
-            timeout(time: 15, unit: 'MINUTES') {
+    def approval = null
+        try {
+            if (requiredApprovalAndChecks) {
+                timeout(time: 15, unit: 'MINUTES') {
                 approval = input(id: 'wait-approval',
                                 message: 'Waiting for approval',
                                 submitterParameter: 'approver',
                                 parameters: [choice(choices: ['Reject', 'Approve'], description: 'Are you sure?', name: 'choice')])
-            }
-
-            if (approval['choice'] == 'Approve') {
-                log.info message: 'Choosed Approve'
-
-                Boolean isUserAllowed = validateDeployApprovedUser(deployApprovedUsers: config.deployApprovedUsers)
-                if (!isUserAllowed) {
-                    throw new Exception('User not allowed to run the pipeline')
                 }
-                log.info message: 'User is allowed to run the pipeline'
-            } else {
-                log.info message: 'Choosed Reject'
-                throw new Exception('Choosed Reject')
+
+                if (approval['choice'] == 'Approve') {
+                    log.info message: 'Choosed Approve'
+                    String userId = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).getUserId()
+                    if (!deployApprovedUsers.contains(userId)) {
+                        throw new Exception('User not allowed to run the pipeline')
+                    }
+                } else {
+                    log.info message: 'Choosed Reject'
+                    throw new Exception('Choosed Reject')
+                }
             }
-    }
-    else {
-        log.info message: 'No approval needed'
-    }
-    log.info message: 'Approval checked!'
+            else
+            {
+                log.info message: 'No approval needed'
+            }
+            
+        }
+        catch (Exception ex)
+        {
+            log.error message: e.getMessage()
+            currentBuild.result = 'Fail'
+        }
 }
 
 Boolean validateDeployApprovedUser(Map config = [:]) {
