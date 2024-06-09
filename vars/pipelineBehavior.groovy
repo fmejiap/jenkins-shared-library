@@ -5,7 +5,7 @@ def validatePipelineApproval(Map config = [:]) {
             if (config.needsApproval) {
                 timeout(time: 15, unit: 'MINUTES') {
                 approval = input(id: 'wait-approval',
-                                message: 'Waiting for approval',
+                                message: '  Waiting for approval  ',
                                 submitterParameter: 'approver',
                                 parameters: [choice(choices: ['Reject', 'Approve'], description: 'Are you sure?', name: 'choice')])
                 }
