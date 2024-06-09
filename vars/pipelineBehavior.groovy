@@ -2,7 +2,7 @@ def validatePipelineApproval(Map config = [:]) {
     log.info message: 'Checking if approval is needed...'
     def approval = null
         try {
-            if (requiredApprovalAndChecks) {
+            if (config.needsApprova) {
                 timeout(time: 15, unit: 'MINUTES') {
                 approval = input(id: 'wait-approval',
                                 message: 'Waiting for approval',
@@ -13,7 +13,7 @@ def validatePipelineApproval(Map config = [:]) {
                 if (approval['choice'] == 'Approve') {
                     log.info message: 'Choosed Approve'
                     String userId = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).getUserId()
-                    if (!deployApprovedUsers.contains(userId)) {
+                    if (!config.deployApprovedUsers.contains(userId)) {
                         throw new Exception('User not allowed to run the pipeline')
                     }
                 } else {
