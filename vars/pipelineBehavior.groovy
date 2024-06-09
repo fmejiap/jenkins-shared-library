@@ -4,7 +4,6 @@ def validatePipelineApproval(Map config = [:]) {
     if (config.needsApproval) {
         log.info message: 'Approval needed'
         def approval = null
-        try {
             timeout(time: 15, unit: 'MINUTES') {
                 approval = input(id: 'wait-approval',
                                 message: 'Waiting for approval',
@@ -24,11 +23,6 @@ def validatePipelineApproval(Map config = [:]) {
                 log.info message: 'Choosed Reject'
                 throw new Exception('Choosed Reject')
             }
-        }
-        catch (Exception e) {
-            log.error message: e.getMessage()
-            currentBuild.result = 'FAILURE'
-        }
     }
     else {
         log.info message: 'No approval needed'
