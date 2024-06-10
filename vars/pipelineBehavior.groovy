@@ -3,7 +3,7 @@ def validatePipelineApproval(Map config = [:]) {
         log.info message: 'Checking if approval is needed...'
         def approval = null
 
-        if (config.needApproval) {
+        if (config.needApproval && config.deployApprovedUsers != null){
             timeout(time: 15, unit: 'MINUTES') {
                 approval = input(id: 'wait-approval',
                                 message: '  Waiting for approval  ',
