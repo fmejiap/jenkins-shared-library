@@ -29,7 +29,7 @@ def validatePipelineApproval(Map config = [:]) {
     }
     catch (Exception ex)
     {
-        log.error message: e.getMessage()
+        log.error message: ex.getMessage()
         currentBuild.result = 'Fail'
     }
 }
