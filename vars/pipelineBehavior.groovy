@@ -6,7 +6,7 @@ def validatePipelineApproval(Map config = [:]) {
         if (config.requireApproval && config.deployApprovedUsers != null) {
             def approvals = config.deployApprovedUsers.join(',')
 
-            timeout(time: 1, unit: 'MINUTES') {
+            timeout(time: 45, unit: 'MINUTES') {
                 userInputApproval = input(id: 'wait-approval',
                                 message: '  Waiting for approval  ',
                                 submitter: approvals,
@@ -29,7 +29,7 @@ def validatePipelineApproval(Map config = [:]) {
     }
     catch (Exception ex) {
         log.error message: ex.getMessage()
-        if (err instanceof org.jenkinsci.plugins.workflow.steps.FlowInterruptedException) {
+        if (ex instanceof org.jenkinsci.plugins.workflow.steps.FlowInterruptedException) {
             def causes = ex.causes
             log.error message: causes
             if (causes.any { it.toString().contains('Rejection') }) {
