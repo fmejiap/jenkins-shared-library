@@ -1,5 +1,6 @@
-import org.jenkinsci.plugins.workflow.cps.steps.UserInputStepExecution
-import org.jenkinsci.plugins.workflow.steps.UserInterruption
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException.CauseOfInterruption.UserInterruption
+
 def validatePipelineApproval(Map config = [:]) {
     try {
         log.info message: 'Checking if approval is needed...'
@@ -24,7 +25,7 @@ def validatePipelineApproval(Map config = [:]) {
                 log.info message: 'Comment: ' + userInputApproval['comment']
                 //def cause = { "User chose to reject the deployment" as String } as jenkins.model.CauseOfInterruption
                 //throw new org.jenkinsci.plugins.workflow.steps.FlowInterruptedException(hudson.model.Result.ABORTED,cause)
-                throw new UserInterruption("User chose to reject the deployment")
+                throw new FlowInterruptedException(new UserInterruption("User chose to reject the deployment"))
             }
         }
         else {
