@@ -28,7 +28,6 @@ def validatePipelineApproval(Map config = [:]) {
         }
     }
     catch (err) {
-        log.error message: err.getMessage()
         if (err instanceof org.jenkinsci.plugins.workflow.steps.FlowInterruptedException) {
             def causes = err.causes
             log.error message: causes
