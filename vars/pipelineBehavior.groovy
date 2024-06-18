@@ -5,9 +5,10 @@ def validatePipelineApproval(Map config = [:]) {
 
         if (config.needApproval && config.deployApprovedUsers != null){
             timeout(time: 15, unit: 'MINUTES') {
+                def approvals = config.deployApprovedUsers.join(',')
                 approval = input(id: 'wait-approval',
                                 message: '  Waiting for approval  ',
-                                submitterParameter: 'approver',
+                                submitter: approvals,
                                 parameters: [choice(choices: ['Reject', 'Approve'], description: 'Are you sure?', name: 'choice'),
                                 text(name: 'comment', defaultValue: '', description: 'Enter some information')])
             }
@@ -15,12 +16,6 @@ def validatePipelineApproval(Map config = [:]) {
             if (approval['choice'] == 'Approve') {
                 log.info message: 'Choosed Approve'
                 log.info message: 'Comment: ' + approval['comment']
-
-                String userId = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).getUserId()
-                if (!config.deployApprovedUsers.contains(userId)) {
-                    log.error message: 'User not allowed to run the pipeline'
-                    throw new Exception('User not allowed to run the pipeline')
-                }
             } else {
                 log.info message: 'Comment: ' + approval['comment']
                 log.info message: 'Choosed Reject'
