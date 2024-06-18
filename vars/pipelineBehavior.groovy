@@ -23,10 +23,8 @@ def validatePipelineApproval(Map config = [:]) {
             } else {
                 log.info message: 'Choosed Reject'
                 log.info message: 'Comment: ' + userInputApproval['comment']
-                throw new FlowInterruptedException(
-                    Result.ABORTED,
-                    new Exception('User chose to reject the deployment')
-                )
+                def cause = { "User chose to reject the deployment}" as String } as CauseOfInterruption
+                throw new FlowInterruptedException(Result.ABORTED,cause)
             }
         }
         else {
