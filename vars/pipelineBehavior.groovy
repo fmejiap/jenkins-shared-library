@@ -20,7 +20,11 @@ def validatePipelineApproval(Map config = [:]) {
             } else {
                 log.info message: 'Choosed Reject'
                 log.info message: 'Comment: ' + userInputApproval['comment']
-                throw new Exception()
+                throw new org.jenkinsci.plugins.workflow.steps.FlowInterruptedException(
+                    org.jenkinsci.plugins.workflow.steps.FlowInterruptedException.Result.ABORTED,
+                    new org.jenkinsci.plugins.workflow.support.steps.input.Rejection(
+                        'User chose to reject the deployment'
+                    )
             }
         }
         else {
