@@ -1,24 +1,25 @@
-def validatePipelineApproval(Map config = [:]) {
+def validatePipelineApprovalTask(Map config = [:]) {
     try {
         log.info message: 'Checking if approval is needed...'
-        def approval = null
+        def userInputApproval = null
 
-        if (config.needApproval && config.deployApprovedUsers != null){
-            timeout(time: 15, unit: 'MINUTES') {
-                def approvals = config.deployApprovedUsers.join(',')
-                approval = input(id: 'wait-approval',
+        if (config.requireApproval && config.deployApprovedUsers != null) {
+            def approvals = config.deployApprovedUsers.join(',')
+
+            timeout(time: 45, unit: 'MINUTES') {
+                userInputApproval = input(id: 'wait-approval',
                                 message: '  Waiting for approval  ',
                                 submitter: approvals,
                                 parameters: [choice(choices: ['Reject', 'Approve'], description: 'Are you sure?', name: 'choice'),
                                 text(name: 'comment', defaultValue: '', description: 'Enter some information')])
             }
 
-            if (approval['choice'] == 'Approve') {
+            if (userInputApproval['choice'] == 'Approve') {
                 log.info message: 'Choosed Approve'
-                log.info message: 'Comment: ' + approval['comment']
+                log.info message: 'Comment: ' + userInputApproval['comment']
             } else {
-                log.info message: 'Comment: ' + approval['comment']
                 log.info message: 'Choosed Reject'
+                log.info message: 'Comment: ' + userInputApproval['comment']
                 throw new Exception('Choosed Reject')
             }
         }
@@ -31,4 +32,14 @@ def validatePipelineApproval(Map config = [:]) {
         log.error message: e.getMessage()
         currentBuild.result = 'Fail'
     }
+}
+
+Boolean checkRequireApproval(Boolean isOrchestratorExecutor = false) {
+    Boolean result = env.DEPLOY_REQUIRED_APPROVAL.toBoolean()
+    log.info message: "Global value(DEPLOY_REQUIRED_APPROVAL): ${result}"
+    if (result && !isOrchestratorExecutor) {
+        result = params.REQUIRED_APPROVAL_NEXT == null ? true : false
+    }
+
+    return result
 }
