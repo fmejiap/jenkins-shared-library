@@ -1,6 +1,3 @@
-import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
-import org.jenkinsci.plugins.workflow.support.steps.input.Rejection
-
 def validatePipelineApproval(Map config = [:]) {
     try {
         log.info message: 'Checking if approval is needed...'
@@ -9,7 +6,7 @@ def validatePipelineApproval(Map config = [:]) {
         if (config.requireApproval && config.deployApprovedUsers != null) {
             def approvals = config.deployApprovedUsers.join(',')
 
-            timeout(time: 1, unit: 'MINUTES') {
+            timeout(time: 45, unit: 'MINUTES') {
                 userInputApproval = input(id: 'wait-approval',
                                 message: '  Waiting for approval  ',
                                 submitter: approvals,
@@ -23,8 +20,7 @@ def validatePipelineApproval(Map config = [:]) {
             } else {
                 log.info message: 'Choosed Reject'
                 log.info message: 'Comment: ' + userInputApproval['comment']
-                def cause = { "User chose to reject the deployment}" as String } as CauseOfInterruption
-                throw new FlowInterruptedException(Result.ABORTED,cause)
+                throw new Exception('Choosed Reject')
             }
         }
         else {
