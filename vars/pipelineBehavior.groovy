@@ -20,7 +20,7 @@ def validatePipelineApproval(Map config = [:]) {
             } else {
                 log.info message: 'Choosed Reject'
                 log.info message: 'Comment: ' + userInputApproval['comment']
-                throw new Exception('Choosed Reject')
+                throw new Exception()
             }
         }
         else {
