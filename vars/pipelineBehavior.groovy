@@ -20,8 +20,7 @@ def validatePipelineApproval(Map config = [:]) {
             } else {
                 log.info message: 'Choosed Reject'
                 log.info message: 'Comment: ' + userInputApproval['comment']
-                //def cause = { "User chose to reject the deployment" as String } as jenkins.model.CauseOfInterruption
-                def cause = new jenkins.model.CauseOfInterruption.UserInterruption("Aborted")
+                def cause = new jenkins.model.CauseOfInterruption.UserInterruption("User chose to reject the deployment")
                 throw new org.jenkinsci.plugins.workflow.steps.FlowInterruptedException(hudson.model.Result.ABORTED,cause)
                 
             }
@@ -38,6 +37,9 @@ def validatePipelineApproval(Map config = [:]) {
                 log.error message: 'The deployment was rejected by an allowed user'
             } else if (causes.any { it.toString().contains('ExceededTimeout') }) {
                 log.error message: 'Timeout exceeded for approval'
+            }
+            else if (causes.any { it.toString().contains('UserInterruption') }) {
+                log.error message: 'User chose to reject the deployment'
             }
             else {
                 log.error message: 'Failed for another reason'
