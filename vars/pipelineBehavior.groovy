@@ -24,19 +24,14 @@ def validatePipelineApproval(Map config = [:]) {
                 log.info message: 'Choosed Reject'
                 log.info message: 'Comment: ' + userInputApproval['comment']
                 def cause = { "User chose to reject the deployment}" as String } as CauseOfInterruption
-                throw new Exception(Result.ABORTED,cause)
+                throw new FlowInterruptedException(Result.ABORTED,cause)
             }
         }
         else {
             log.info message: 'No approval needed'
         }
     }
-    catch (FlowInterruptedException ex) {
-            def causes = ex.causes
-            log.error message: causes
-        throw ex
-    }
-    catch (Exception ex) {
+    catch (ex) {
         if (ex instanceof org.jenkinsci.plugins.workflow.steps.FlowInterruptedException) {
             def causes = ex.causes
             log.error message: causes
