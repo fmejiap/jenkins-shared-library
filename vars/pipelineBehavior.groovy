@@ -1,6 +1,3 @@
-import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
-import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException.CauseOfInterruption.UserInterruption
-
 def validatePipelineApproval(Map config = [:]) {
     try {
         log.info message: 'Checking if approval is needed...'
