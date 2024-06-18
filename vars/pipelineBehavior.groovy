@@ -1,4 +1,4 @@
-def validatePipelineApprovalTask(Map config = [:]) {
+def validatePipelineApproval(Map config = [:]) {
     try {
         log.info message: 'Checking if approval is needed...'
         def userInputApproval = null
