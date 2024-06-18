@@ -27,19 +27,25 @@ def validatePipelineApproval(Map config = [:]) {
             log.info message: 'No approval needed'
         }
     }
+    catch (err) {
+        log.error message: err.getMessage()
+        if (err instanceof org.jenkinsci.plugins.workflow.steps.FlowInterruptedException) {
+            def causes = err.causes
+            log.error message: causes
+            if (causes.any { it.toString().contains('Rejection') }) {
+                log.error message: 'The deployment was rejected by an allowed user'
+            } else if (causes.any { it.toString().contains('ExceededTimeout') }) {
+                log.error message: 'Timeout exceeded for approval'
+            }
+            else {
+                log.error message: 'Failed for another reason'
+            }
+            currentBuild.result = 'Fail'
+    }
+    }
     catch (Exception ex)
     {
         log.error message: ex.getMessage()
         currentBuild.result = 'Fail'
     }
-}
-
-Boolean checkRequireApproval(Boolean isOrchestratorExecutor = false) {
-    Boolean result = env.DEPLOY_REQUIRED_APPROVAL.toBoolean()
-    log.info message: "Global value(DEPLOY_REQUIRED_APPROVAL): ${result}"
-    if (result && !isOrchestratorExecutor) {
-        result = params.REQUIRED_APPROVAL_NEXT == null ? true : false
-    }
-
-    return result
 }
