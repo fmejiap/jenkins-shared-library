@@ -21,7 +21,7 @@ def validatePipelineApproval(Map config = [:]) {
                 log.info message: 'Choosed Reject'
                 log.info message: 'Comment: ' + userInputApproval['comment']
                 //def cause = { "User chose to reject the deployment" as String } as jenkins.model.CauseOfInterruption
-                def cause = new enkins.model.CauseOfInterruption.UserInterruption("Aborted")
+                def cause = new jenkins.model.CauseOfInterruption.UserInterruption("Aborted")
                 throw new org.jenkinsci.plugins.workflow.steps.FlowInterruptedException(hudson.model.Result.ABORTED,cause)
                 
             }
