@@ -40,7 +40,7 @@ def validatePipelineApproval(Map config = [:]) {
             else {
                 log.error message: 'Failed for another reason'
             }
-            currentBuild.result = 'Fail'
+            currentBuild.result = 'FAILURE'
     }
     }
 }
