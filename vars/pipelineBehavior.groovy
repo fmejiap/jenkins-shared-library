@@ -1,3 +1,6 @@
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+import org.jenkinsci.plugins.workflow.support.steps.input.Rejection
+
 def validatePipelineApproval(Map config = [:]) {
     try {
         log.info message: 'Checking if approval is needed...'
@@ -20,8 +23,7 @@ def validatePipelineApproval(Map config = [:]) {
             } else {
                 log.info message: 'Choosed Reject'
                 log.info message: 'Comment: ' + userInputApproval['comment']
-                throw new org.jenkinsci.plugins.workflow.steps.FlowInterruptedException(org.jenkinsci.plugins.workflow.steps.FlowInterruptedException.Result.ABORTED,
-                                                                                        new org.jenkinsci.plugins.workflow.support.steps.input.Rejection('User chose to reject the deployment')
+                throw new FlowInterruptedException(FlowInterruptedException.Result.ABORTED,new Rejection('User chose to reject the deployment')
                 )
             }
         }
