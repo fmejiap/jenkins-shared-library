@@ -27,7 +27,7 @@ def validatePipelineApproval(Map config = [:]) {
             log.info message: 'No approval needed'
         }
     }
-    catch (err) {
+    catch (Exception err) {
         if (err instanceof org.jenkinsci.plugins.workflow.steps.FlowInterruptedException) {
             def causes = err.causes
             log.error message: causes
