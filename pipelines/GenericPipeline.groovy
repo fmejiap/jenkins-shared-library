@@ -5,7 +5,7 @@ timeout(time: timeoutMinutes, unit: 'MINUTES')
     
     def deployApprovedUsers= ["admin","admin"]
     stage('Prepare') {
-        log.info message "Prepare Stage"
+        log.info message:"Prepare Stage"
     }
     stage('Approvals') {
       echo "Launching Operation 01"
