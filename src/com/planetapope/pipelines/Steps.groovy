@@ -1,4 +1,5 @@
 package com.planetapope.pipelines
+import com.planetapope.logger.Logger
 
 class Steps {
     def script
