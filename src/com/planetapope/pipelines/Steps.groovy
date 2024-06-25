@@ -1,3 +1,5 @@
+@Library('jenkins-shared-library') _
+
 package com.planetapope.pipelines
 
 class Steps {
