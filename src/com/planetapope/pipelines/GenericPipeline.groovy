@@ -12,7 +12,7 @@ timeout(time: timeoutMinutes, unit: 'MINUTES')
     }
     stage('Approvals') {        
       echo "Launching Operation 01"
-        def steps=new Steps()
+        def steps=new Steps(this)
         def result = steps.helloWorldTask("People!!")
         echo "${result}"
     }
