@@ -1,4 +1,6 @@
 @Library('jenkins-shared-library') _
+import pipelines.Steps
+
 def timeoutMinutes = 40
 timeout(time: timeoutMinutes, unit: 'MINUTES')
 {
