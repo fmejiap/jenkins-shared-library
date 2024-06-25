@@ -4,7 +4,7 @@ class Steps {
 
     def helloWorldTask(message) {
         try {
-          println "Hi ${message}"
+          println 'HelloWorldTask executed.'
         }
         catch (Exception ex) {
             throw ex
