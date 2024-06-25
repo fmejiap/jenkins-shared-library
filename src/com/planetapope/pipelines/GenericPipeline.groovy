@@ -1,5 +1,7 @@
 @Library('jenkins-shared-library') _
 
+import com.planetapope.pipelines.*
+
 def timeoutMinutes = 40
 timeout(time: timeoutMinutes, unit: 'MINUTES')
 {
@@ -10,6 +12,8 @@ timeout(time: timeoutMinutes, unit: 'MINUTES')
     }
     stage('Approvals') {        
       echo "Launching Operation 01"
+        def steps=new Steps()
+        steps.helloWorldTask("People!!")
     }
     stage('Operation 01') {
         echo "Launching Operation 01"
