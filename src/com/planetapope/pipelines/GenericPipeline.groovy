@@ -8,10 +8,7 @@ timeout(time: timeoutMinutes, unit: 'MINUTES')
     stage('Prepare') {
         log.info message:"Prepare Stage"
     }
-    stage('Approvals') {
-        def steps = new Steps()
-        steps.helloWorldTask("People")
-        
+    stage('Approvals') {        
       echo "Launching Operation 01"
     }
     stage('Operation 01') {
