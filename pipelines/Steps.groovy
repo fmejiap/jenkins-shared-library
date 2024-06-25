@@ -1,3 +1,5 @@
+package pipelines
+
 class Steps {
 
     def helloWorldTask(message) {
